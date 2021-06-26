@@ -57,9 +57,7 @@ class _OffscreenCompositor {
     final image = await imageFuture;
 
     /// Prepare image elements.
-    final frameAssetPath = targetAspectRatio < 1
-        ? 'assets/assets/images/photo_frame_mobile_download.png'
-        : 'assets/assets/images/photo_frame_download.png';
+    const frameAssetPath = 'assets/images/photo_frame_download.png';
     final frameImage = await HtmlImageLoader(frameAssetPath).loadImage();
 
     /// Compute target coordinates and target image size from assets.

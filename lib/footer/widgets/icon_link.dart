@@ -21,34 +21,6 @@ class IconLink extends StatelessWidget {
   }
 }
 
-class FlutterIconLink extends StatelessWidget {
-  const FlutterIconLink({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconLink(
-      icon: Image.asset('assets/icons/flutter_icon.png'),
-      link: flutterDevExternalLink,
-    );
-  }
-}
-
-class FirebaseIconLink extends StatelessWidget {
-  const FirebaseIconLink({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconLink(
-      icon: Image.asset('assets/icons/firebase_icon.png'),
-      link: firebaseExternalLink,
-    );
-  }
-}
-
 class MadeWithIconLinks extends StatelessWidget {
   const MadeWithIconLinks({Key? key}) : super(key: key);
 
@@ -56,11 +28,7 @@ class MadeWithIconLinks extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
-      children: const [
-        FlutterIconLink(),
-        SizedBox(width: 8),
-        FirebaseIconLink(),
-      ],
+      children: const [],
     );
   }
 }
