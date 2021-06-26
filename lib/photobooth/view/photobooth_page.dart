@@ -7,6 +7,7 @@ import 'package:io_photobooth/photobooth/photobooth.dart';
 import 'package:io_photobooth/stickers/stickers.dart';
 import 'package:photobooth_ui/photobooth_ui.dart';
 import 'package:very_good_analysis/very_good_analysis.dart';
+import 'package:io_photobooth/share/share.dart';
 
 const _videoConstraints = VideoConstraints(
   facingMode: FacingMode(
@@ -89,7 +90,7 @@ class _PhotoboothViewState extends State<PhotoboothView> {
         .add(PhotoCaptured(aspectRatio: aspectRatio, image: picture));
     final stickersPage = StickersPage.route();
     await _stop();
-    unawaited(Navigator.of(context).pushReplacement(stickersPage));
+    unawaited(Navigator.of(context).pushReplacement(SharePage.route()));
   }
 
   @override

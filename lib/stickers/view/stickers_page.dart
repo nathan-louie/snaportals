@@ -8,7 +8,7 @@ import 'package:io_photobooth/stickers/stickers.dart';
 import 'package:photobooth_ui/photobooth_ui.dart';
 import 'package:very_good_analysis/very_good_analysis.dart';
 
-const _initialStickerScale = 0.25;
+// const _initialStickerScale = 0.25;
 const _minStickerScale = 0.05;
 
 class StickersPage extends StatelessWidget {
@@ -59,28 +59,28 @@ class StickersView extends StatelessWidget {
                     ),
                   ),
                   const CharactersLayer(),
-                  const _DraggableStickers(),
-                  Positioned(
-                    left: 15,
-                    top: 15,
-                    child: Row(
-                      children: const [
-                        _RetakeButton(),
-                        ClearStickersButtonLayer(),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    right: 15,
-                    top: 15,
-                    child: OpenStickersButton(
-                      onPressed: () {
-                        context
-                            .read<StickersBloc>()
-                            .add(const StickersDrawerToggled());
-                      },
-                    ),
-                  ),
+                  // const _DraggableStickers(),
+                  // Positioned(
+                  //   left: 15,
+                  //   top: 15,
+                  //   child: Row(
+                  //     children: const [
+                  //       _RetakeButton(),
+                  //       ClearStickersButtonLayer(),
+                  //     ],
+                  //   ),
+                  // ),
+                  // Positioned(
+                  //   right: 15,
+                  //   top: 15,
+                  //   child: OpenStickersButton(
+                  //     onPressed: () {
+                  //       context
+                  //           .read<StickersBloc>()
+                  //           .add(const StickersDrawerToggled());
+                  //     },
+                  //   ),
+                  // ),
                   const Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
@@ -88,10 +88,10 @@ class StickersView extends StatelessWidget {
                       child: _NextButton(),
                     ),
                   ),
-                  const Align(
-                    alignment: Alignment.bottomCenter,
-                    child: _StickerReminderText(),
-                  )
+                  // const Align(
+                  //   alignment: Alignment.bottomCenter,
+                  //   child: _StickerReminderText(),
+                  // )
                 ],
               ),
             ),
@@ -103,104 +103,104 @@ class StickersView extends StatelessWidget {
   }
 }
 
-class _StickerReminderText extends StatelessWidget {
-  const _StickerReminderText({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    final shouldDisplayPropsReminder = context.select(
-      (StickersBloc bloc) => bloc.state.shouldDisplayPropsReminder,
-    );
+// class _StickerReminderText extends StatelessWidget {
+//   const _StickerReminderText({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     final shouldDisplayPropsReminder = context.select(
+//       (StickersBloc bloc) => bloc.state.shouldDisplayPropsReminder,
+//     );
 
-    if (!shouldDisplayPropsReminder) return const SizedBox();
+//     if (!shouldDisplayPropsReminder) return const SizedBox();
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 125),
-      child: AppTooltip.custom(
-        key: const Key('stickersPage_propsReminder_appTooltip'),
-        visible: true,
-        message: context.l10n.propsReminderText,
-      ),
-    );
-  }
-}
+//     return Container(
+//       margin: const EdgeInsets.only(bottom: 125),
+//       child: AppTooltip.custom(
+//         key: const Key('stickersPage_propsReminder_appTooltip'),
+//         visible: true,
+//         message: context.l10n.propsReminderText,
+//       ),
+//     );
+//   }
+// }
 
-class _DraggableStickers extends StatelessWidget {
-  const _DraggableStickers({Key? key}) : super(key: key);
+// class _DraggableStickers extends StatelessWidget {
+//   const _DraggableStickers({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final state = context.watch<PhotoboothBloc>().state;
-    if (state.stickers.isEmpty) return const SizedBox();
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Positioned.fill(
-          child: GestureDetector(
-            key: const Key('stickersView_background_gestureDetector'),
-            onTap: () {
-              context.read<PhotoboothBloc>().add(const PhotoTapped());
-            },
-          ),
-        ),
-        for (final sticker in state.stickers)
-          DraggableResizable(
-            key: Key('stickerPage_${sticker.id}_draggableResizable_asset'),
-            canTransform: sticker.id == state.selectedAssetId,
-            onUpdate: (update) => context
-                .read<PhotoboothBloc>()
-                .add(PhotoStickerDragged(sticker: sticker, update: update)),
-            onDelete: () => context
-                .read<PhotoboothBloc>()
-                .add(const PhotoDeleteSelectedStickerTapped()),
-            size: sticker.asset.size * _initialStickerScale,
-            constraints: sticker.getImageConstraints(),
-            child: SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: Image.asset(
-                sticker.asset.path,
-                fit: BoxFit.fill,
-                gaplessPlayback: true,
-              ),
-            ),
-          ),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final state = context.watch<PhotoboothBloc>().state;
+//     if (state.stickers.isEmpty) return const SizedBox();
+//     return Stack(
+//       fit: StackFit.expand,
+//       children: [
+//         Positioned.fill(
+//           child: GestureDetector(
+//             key: const Key('stickersView_background_gestureDetector'),
+//             onTap: () {
+//               context.read<PhotoboothBloc>().add(const PhotoTapped());
+//             },
+//           ),
+//         ),
+//         for (final sticker in state.stickers)
+//           DraggableResizable(
+//             key: Key('stickerPage_${sticker.id}_draggableResizable_asset'),
+//             canTransform: sticker.id == state.selectedAssetId,
+//             onUpdate: (update) => context
+//                 .read<PhotoboothBloc>()
+//                 .add(PhotoStickerDragged(sticker: sticker, update: update)),
+//             onDelete: () => context
+//                 .read<PhotoboothBloc>()
+//                 .add(const PhotoDeleteSelectedStickerTapped()),
+//             size: sticker.asset.size * _initialStickerScale,
+//             constraints: sticker.getImageConstraints(),
+//             child: SizedBox(
+//               width: double.infinity,
+//               height: double.infinity,
+//               child: Image.asset(
+//                 sticker.asset.path,
+//                 fit: BoxFit.fill,
+//                 gaplessPlayback: true,
+//               ),
+//             ),
+//           ),
+//       ],
+//     );
+//   }
+// }
 
-class _RetakeButton extends StatelessWidget {
-  const _RetakeButton({Key? key}) : super(key: key);
+// class _RetakeButton extends StatelessWidget {
+//   const _RetakeButton({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return Semantics(
-      focusable: true,
-      button: true,
-      label: l10n.retakePhotoButtonLabelText,
-      child: AppTooltipButton(
-        key: const Key('stickersPage_retake_appTooltipButton'),
-        onPressed: () async {
-          final confirmed = await showAppModal(
-            context: context,
-            landscapeChild: const _RetakeConfirmationDialogContent(),
-            portraitChild: const _RetakeConfirmationBottomSheet(),
-          );
-          if (confirmed) {
-            context.read<PhotoboothBloc>().add(const PhotoClearAllTapped());
-            unawaited(
-              Navigator.of(context).pushReplacement(PhotoboothPage.route()),
-            );
-          }
-        },
-        verticalOffset: 50,
-        message: l10n.retakeButtonTooltip,
-        child: Image.asset('assets/icons/retake_button_icon.png', height: 100),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final l10n = context.l10n;
+//     return Semantics(
+//       focusable: true,
+//       button: true,
+//       label: l10n.retakePhotoButtonLabelText,
+//       child: AppTooltipButton(
+//         key: const Key('stickersPage_retake_appTooltipButton'),
+//         onPressed: () async {
+//           final confirmed = await showAppModal(
+//             context: context,
+//             landscapeChild: const _RetakeConfirmationDialogContent(),
+//             portraitChild: const _RetakeConfirmationBottomSheet(),
+//           );
+//           if (confirmed) {
+//             context.read<PhotoboothBloc>().add(const PhotoClearAllTapped());
+//             unawaited(
+//               Navigator.of(context).pushReplacement(PhotoboothPage.route()),
+//             );
+//           }
+//         },
+//         verticalOffset: 50,
+//         message: l10n.retakeButtonTooltip,
+//         child: Image.asset('assets/icons/retake_button_icon.png', height: 100),
+//       ),
+//     );
+//   }
+// }
 
 class _NextButton extends StatelessWidget {
   const _NextButton({Key? key}) : super(key: key);
@@ -219,16 +219,15 @@ class _NextButton extends StatelessWidget {
         child: InkWell(
           key: const Key('stickersPage_next_inkWell'),
           onTap: () async {
-            final confirmed = await showAppModal(
-              context: context,
-              landscapeChild: const _NextConfirmationDialogContent(),
-              portraitChild: const _NextConfirmationBottomSheet(),
+            // final confirmed = await showAppModal(
+            //   context: context,
+            //   landscapeChild: const _NextConfirmationDialogContent(),
+            //   portraitChild: const _NextConfirmationBottomSheet(),
+            // );
+
+            unawaited(
+              Navigator.of(context).pushReplacement(SharePage.route()),
             );
-            if (confirmed) {
-              unawaited(
-                Navigator.of(context).pushReplacement(SharePage.route()),
-              );
-            }
           },
           child: Image.asset(
             'assets/icons/go_next_button_icon.png',
@@ -240,94 +239,94 @@ class _NextButton extends StatelessWidget {
   }
 }
 
-class _RetakeConfirmationDialogContent extends StatelessWidget {
-  const _RetakeConfirmationDialogContent({Key? key}) : super(key: key);
+// class _RetakeConfirmationDialogContent extends StatelessWidget {
+//   const _RetakeConfirmationDialogContent({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final theme = Theme.of(context);
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(60),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                l10n.stickersRetakeConfirmationHeading,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.headline1,
-              ),
-              const SizedBox(height: 24),
-              Text(
-                l10n.stickersRetakeConfirmationSubheading,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.headline3,
-              ),
-              const SizedBox(height: 24),
-              Wrap(
-                alignment: WrapAlignment.center,
-                spacing: 24,
-                runSpacing: 24,
-                children: [
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: PhotoboothColors.black),
-                    ),
-                    onPressed: () => Navigator.of(context).pop(false),
-                    child: Text(
-                      l10n.stickersRetakeConfirmationCancelButtonText,
-                      style: theme.textTheme.button?.copyWith(
-                        color: PhotoboothColors.black,
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => Navigator.of(context).pop(true),
-                    child: Text(
-                      l10n.stickersRetakeConfirmationConfirmButtonText,
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final l10n = context.l10n;
+//     final theme = Theme.of(context);
+//     return SingleChildScrollView(
+//       child: Padding(
+//         padding: const EdgeInsets.all(60),
+//         child: Center(
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               Text(
+//                 l10n.stickersRetakeConfirmationHeading,
+//                 textAlign: TextAlign.center,
+//                 style: theme.textTheme.headline1,
+//               ),
+//               const SizedBox(height: 24),
+//               Text(
+//                 l10n.stickersRetakeConfirmationSubheading,
+//                 textAlign: TextAlign.center,
+//                 style: theme.textTheme.headline3,
+//               ),
+//               const SizedBox(height: 24),
+//               Wrap(
+//                 alignment: WrapAlignment.center,
+//                 spacing: 24,
+//                 runSpacing: 24,
+//                 children: [
+//                   OutlinedButton(
+//                     style: OutlinedButton.styleFrom(
+//                       side: const BorderSide(color: PhotoboothColors.black),
+//                     ),
+//                     onPressed: () => Navigator.of(context).pop(false),
+//                     child: Text(
+//                       l10n.stickersRetakeConfirmationCancelButtonText,
+//                       style: theme.textTheme.button?.copyWith(
+//                         color: PhotoboothColors.black,
+//                       ),
+//                     ),
+//                   ),
+//                   ElevatedButton(
+//                     onPressed: () => Navigator.of(context).pop(true),
+//                     child: Text(
+//                       l10n.stickersRetakeConfirmationConfirmButtonText,
+//                     ),
+//                   )
+//                 ],
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-class _RetakeConfirmationBottomSheet extends StatelessWidget {
-  const _RetakeConfirmationBottomSheet({Key? key}) : super(key: key);
+// class _RetakeConfirmationBottomSheet extends StatelessWidget {
+//   const _RetakeConfirmationBottomSheet({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 30),
-      decoration: const BoxDecoration(
-        color: PhotoboothColors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-      ),
-      child: Stack(
-        children: [
-          const _RetakeConfirmationDialogContent(),
-          Positioned(
-            right: 24,
-            top: 24,
-            child: IconButton(
-              icon: const Icon(Icons.clear, color: PhotoboothColors.black54),
-              onPressed: () => Navigator.of(context).pop(false),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: const EdgeInsets.only(top: 30),
+//       decoration: const BoxDecoration(
+//         color: PhotoboothColors.white,
+//         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+//       ),
+//       child: Stack(
+//         children: [
+//           const _RetakeConfirmationDialogContent(),
+//           Positioned(
+//             right: 24,
+//             top: 24,
+//             child: IconButton(
+//               icon: const Icon(Icons.clear, color: PhotoboothColors.black54),
+//               onPressed: () => Navigator.of(context).pop(false),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class _NextConfirmationDialogContent extends StatelessWidget {
   const _NextConfirmationDialogContent({Key? key}) : super(key: key);
@@ -429,43 +428,43 @@ extension on PhotoAsset {
   }
 }
 
-class OpenStickersButton extends StatefulWidget {
-  const OpenStickersButton({
-    Key? key,
-    required this.onPressed,
-  }) : super(key: key);
+// class OpenStickersButton extends StatefulWidget {
+//   const OpenStickersButton({
+//     Key? key,
+//     required this.onPressed,
+//   }) : super(key: key);
 
-  final VoidCallback onPressed;
+//   final VoidCallback onPressed;
 
-  @override
-  State<OpenStickersButton> createState() => _OpenStickersButtonState();
-}
+//   @override
+//   State<OpenStickersButton> createState() => _OpenStickersButtonState();
+// }
 
-class _OpenStickersButtonState extends State<OpenStickersButton> {
-  bool _isAnimating = true;
+// class _OpenStickersButtonState extends State<OpenStickersButton> {
+//   bool _isAnimating = true;
 
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final child = Semantics(
-      focusable: true,
-      button: true,
-      label: l10n.addStickersButtonLabelText,
-      child: AppTooltipButton(
-        key: const Key('stickersView_openStickersButton_appTooltipButton'),
-        onPressed: () {
-          widget.onPressed();
-          if (_isAnimating) setState(() => _isAnimating = false);
-        },
-        message: l10n.openStickersTooltip,
-        verticalOffset: 50,
-        mode: TooltipMode.normal,
-        child: Image.asset(
-          'assets/icons/stickers_button_icon.png',
-          height: 100,
-        ),
-      ),
-    );
-    return _isAnimating ? AnimatedPulse(child: child) : child;
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final l10n = context.l10n;
+//     final child = Semantics(
+//       focusable: true,
+//       button: true,
+//       label: l10n.addStickersButtonLabelText,
+//       child: AppTooltipButton(
+//         key: const Key('stickersView_openStickersButton_appTooltipButton'),
+//         onPressed: () {
+//           widget.onPressed();
+//           if (_isAnimating) setState(() => _isAnimating = false);
+//         },
+//         message: l10n.openStickersTooltip,
+//         verticalOffset: 50,
+//         mode: TooltipMode.normal,
+//         child: Image.asset(
+//           'assets/icons/stickers_button_icon.png',
+//           height: 100,
+//         ),
+//       ),
+//     );
+//     return _isAnimating ? AnimatedPulse(child: child) : child;
+//   }
+// }
