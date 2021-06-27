@@ -12,12 +12,10 @@ AudioPlayer _getAudioPlayer() => AudioPlayer();
 class ShutterButton extends StatefulWidget {
   const ShutterButton({
     Key? key,
-    required this.onCountdownComplete,
     ValueGetter<AudioPlayer>? audioPlayer,
   })  : _audioPlayer = audioPlayer ?? _getAudioPlayer,
         super(key: key);
 
-  final VoidCallback onCountdownComplete;
   final ValueGetter<AudioPlayer> _audioPlayer;
 
   @override
@@ -30,9 +28,9 @@ class _ShutterButtonState extends State<ShutterButton>
   late final AudioPlayer audioPlayer;
 
   void _onAnimationStatusChanged(AnimationStatus status) async {
-    if (status == AnimationStatus.dismissed) {
-      widget.onCountdownComplete();
-    }
+    // if (status == AnimationStatus.dismissed) {
+    //   widget.onCountdownComplete();
+    // }
   }
 
   @override

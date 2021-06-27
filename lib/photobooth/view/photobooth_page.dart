@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:io_photobooth/gallery/view/gallery_page.dart';
 import 'package:io_photobooth/photobooth/photobooth.dart';
 import 'package:io_photobooth/share/share.dart';
 import 'package:photobooth_ui/photobooth_ui.dart';
@@ -88,7 +89,7 @@ class _PhotoboothViewState extends State<PhotoboothView> {
         .read<PhotoboothBloc>()
         .add(PhotoCaptured(aspectRatio: aspectRatio, image: picture));
     await _stop();
-    unawaited(Navigator.of(context).pushReplacement(SharePage.route()));
+    unawaited(Navigator.of(context).pushReplacement(GalleryPage.route()));
   }
 
   @override
@@ -97,6 +98,8 @@ class _PhotoboothViewState extends State<PhotoboothView> {
     final aspectRatio = orientation == Orientation.portrait
         ? PhotoboothAspectRatio.portrait
         : PhotoboothAspectRatio.landscape;
+    Future.delayed(const Duration(seconds: 3),
+        () => _onSnapPressed(aspectRatio: aspectRatio));
     return Scaffold(
       body: _PhotoboothBackground(
         aspectRatio: aspectRatio,
@@ -105,7 +108,6 @@ class _PhotoboothViewState extends State<PhotoboothView> {
           placeholder: (_) => const SizedBox(),
           preview: (context, preview) => PhotoboothPreview(
             preview: preview,
-            onSnapPressed: () => _onSnapPressed(aspectRatio: aspectRatio),
           ),
           error: (context, error) => PhotoboothError(error: error),
         ),
