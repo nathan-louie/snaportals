@@ -1,12 +1,12 @@
 if (typeof firebase === 'undefined') throw new Error('hosting/init-error: Firebase SDK not detected. You must include it before /__/firebase/init.js');
 var firebaseConfig = {
-  "projectId": "io-photobooth-dev",
-  "appId": "1:931695903758:web:33a07d199e97fa53f4a85f",
-  "storageBucket": "io-photobooth-dev.appspot.com",
+  "projectId": "snaportals",
+  "appId": "1:195916551680:web:79057ea99c5cce94b96ae5",
+  "storageBucket": "snaportals.appspot.com",
   "locationId": "us-central",
-  "apiKey": "AIzaSyAwrGoDm6syeESeWV1HApzDKZEomMEtR4U",
-  "authDomain": "io-photobooth-dev.firebaseapp.com",
-  "messagingSenderId": "931695903758"
+  "apiKey": "AIzaSyDQOjaiQB6EW96KFTz8VHSrHicov18qyXA",
+  "authDomain": "snaportals.firebaseapp.com",
+  "messagingSenderId": "195916551680"
 };
 if (firebaseConfig) {
   firebase.initializeApp(firebaseConfig);
