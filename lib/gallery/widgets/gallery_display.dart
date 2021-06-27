@@ -10,10 +10,19 @@ class GalleryDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return Image.network(a[index]);
-        },
-        itemCount: a.length);
+    return GridView.extent(
+        maxCrossAxisExtent: 200,
+        padding: const EdgeInsets.all(4),
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        children: _buildGridTileList());
   }
+
+  List<Container> _buildGridTileList() => List.generate(
+      a.length,
+      (i) => Container(
+              child: Image.network(
+            a[i],
+            height: 300,
+          )));
 }

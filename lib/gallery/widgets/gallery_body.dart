@@ -21,10 +21,7 @@ class GalleryBody extends StatelessWidget {
             style: theme.textTheme.headline1,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(
-            height: 3000.0,
-            child: GalleryDisplay(),
-          )
+          const SizedBox(height: 900, child: GalleryDisplay()),
         ],
       ),
     );
