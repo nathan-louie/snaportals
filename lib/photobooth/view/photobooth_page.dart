@@ -1,13 +1,16 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_compositor/image_compositor.dart';
+import 'package:io_photobooth/gallery/gallery.dart';
 import 'package:io_photobooth/gallery/view/gallery_page.dart';
 import 'package:io_photobooth/photobooth/photobooth.dart';
-import 'package:io_photobooth/share/share.dart';
 import 'package:photobooth_ui/photobooth_ui.dart';
-import 'package:very_good_analysis/very_good_analysis.dart';
+import 'package:photos_repository/photos_repository.dart';
+import 'package:photos_repository/src/photos_repository.dart';
 
 const _videoConstraints = VideoConstraints(
   facingMode: FacingMode(
@@ -83,13 +86,47 @@ class _PhotoboothViewState extends State<PhotoboothView> {
     await _play();
   }
 
+  Future<Uint8List> _composite(
+      PhotosRepository pr, PhotoboothState ps, CameraImage p) async {
+    final composite = await pr.composite(
+      aspectRatio: ps.aspectRatio,
+      data: p.data,
+      width: p.width,
+      height: p.height,
+      layers: [
+        ...ps.assets.map(
+          (l) => CompositeLayer(
+            angle: l.angle,
+            assetPath: 'assets/${l.asset.path}',
+            constraints: Vector2D(l.constraint.width, l.constraint.height),
+            position: Vector2D(l.position.dx, l.position.dy),
+            size: Vector2D(l.size.width, l.size.height),
+          ),
+        )
+      ],
+    );
+    return Uint8List.fromList(composite);
+  }
+
+  String _getPhotoFileName(String photoName) => '$photoName.png';
+
   void _onSnapPressed({required double aspectRatio}) async {
     final picture = await _controller.takePicture();
     context
         .read<PhotoboothBloc>()
         .add(PhotoCaptured(aspectRatio: aspectRatio, image: picture));
     await _stop();
-    unawaited(Navigator.of(context).pushReplacement(GalleryPage.route()));
+
+    var d = Uint8List(0);
+
+    await (_composite(context.read<PhotosRepository>(),
+            context.read<PhotoboothBloc>().state, picture)
+        .then((value) => d = value));
+
+    await context.read<PhotosRepository>().sharePhoto(
+        fileName: _getPhotoFileName('dinopee'), data: d, shareText: '');
+
+    await Navigator.of(context).pushReplacement(GalleryPage.route());
   }
 
   @override
@@ -98,7 +135,7 @@ class _PhotoboothViewState extends State<PhotoboothView> {
     final aspectRatio = orientation == Orientation.portrait
         ? PhotoboothAspectRatio.portrait
         : PhotoboothAspectRatio.landscape;
-    Future.delayed(const Duration(seconds: 3),
+    Future.delayed(const Duration(seconds: 5),
         () => _onSnapPressed(aspectRatio: aspectRatio));
     return Scaffold(
       body: _PhotoboothBackground(

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -99,7 +100,7 @@ class PhotosRepository {
     }
 
     try {
-      await reference.putData(data);
+      await reference.putFile(File.fromRawPath(data));
     } catch (error, stackTrace) {
       throw UploadPhotoException(
         'Uploading photo $fileName failed. '

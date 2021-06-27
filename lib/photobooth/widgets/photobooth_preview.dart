@@ -1,9 +1,6 @@
-import 'package:analytics/analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:io_photobooth/assets.g.dart';
 import 'package:io_photobooth/footer/footer.dart';
-import 'package:io_photobooth/l10n/l10n.dart';
 import 'package:io_photobooth/photobooth/photobooth.dart';
 import 'package:photobooth_ui/photobooth_ui.dart';
 
@@ -20,7 +17,6 @@ class PhotoboothPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     final state = context.watch<PhotoboothBloc>().state;
     // final children = <Widget>[
     //   CharacterIconButton(
@@ -123,12 +119,12 @@ class PhotoboothPreview extends StatelessWidget {
             child: _AnimatedCharacter(name: character.asset.name),
           ),
         // CharactersIconLayout(children: children),
-        Align(
+        const Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 30),
+            padding: EdgeInsets.only(bottom: 30),
             child: ShutterButton(
-              key: const Key('photoboothPreview_photo_shutterButton'),
+              key: Key('photoboothPreview_photo_shutterButton'),
             ),
           ),
         ),

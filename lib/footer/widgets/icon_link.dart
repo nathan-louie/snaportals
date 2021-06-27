@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:io_photobooth/external_links/external_links.dart';
 import 'package:photobooth_ui/photobooth_ui.dart';
 
 class IconLink extends StatelessWidget {

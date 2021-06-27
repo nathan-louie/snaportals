@@ -58,7 +58,7 @@ class _OffscreenCompositor {
 
     /// Prepare image elements.
     const frameAssetPath = 'assets/images/photo_frame_download.png';
-    final frameImage = await HtmlImageLoader(frameAssetPath).loadImage();
+    final frameImage = await const HtmlImageLoader(frameAssetPath).loadImage();
 
     /// Compute target coordinates and target image size from assets.
     final targetWidth = frameImage.width;

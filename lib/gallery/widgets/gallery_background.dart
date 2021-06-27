@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:photobooth_ui/photobooth_ui.dart';
 
 class GalleryBackground extends StatelessWidget {
   const GalleryBackground({Key? key}) : super(key: key);
