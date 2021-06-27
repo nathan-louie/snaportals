@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class GalleryDisplay extends StatelessWidget {
   const GalleryDisplay({Key? key}) : super(key: key);
+
   static const List a = [
-    'https://picsum.photos/250?image=9',
-    'https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171_960_720.jpg',
-    'https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539_960_720.jpg'
+    'https://firebasestorage.googleapis.com/v0/b/snaportals.appspot.com/o/uploads%2Fdash.png?alt=media',
+    'https://firebasestorage.googleapis.com/v0/b/snaportals.appspot.com/o/uploads%2Fdino.png?alt=media',
+    'https://firebasestorage.googleapis.com/v0/b/snaportals.appspot.com/o/uploads%2Fsparky.png?alt=media',
+    'https://firebasestorage.googleapis.com/v0/b/snaportals.appspot.com/o/uploads%2Fdinopee.png?alt=media',
   ];
 
   @override

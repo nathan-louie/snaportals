@@ -82,31 +82,17 @@ class PhotosRepository {
   }) async {
     Reference reference;
     try {
+      print('before reference make');
       reference = _firebaseStorage.ref('uploads/$fileName');
-    } catch (e, st) {
-      throw UploadPhotoException(
-        'Uploading photo $fileName failed. '
-        'Couldn\'t get storage reference \'uploads/$fileName\'.'
-        'Error: $e. StackTrace: $st',
-      );
-    }
-
-    if (await _photoExists(reference)) {
-      return ShareUrls(
-        explicitShareUrl: _getSharePhotoUrl(fileName),
-        facebookShareUrl: _facebookShareUrl(fileName, shareText),
-        twitterShareUrl: _twitterShareUrl(fileName, shareText),
-      );
+    } catch (e) {
+      throw UploadPhotoException('no');
     }
 
     try {
-      await reference.putFile(File.fromRawPath(data));
-    } catch (error, stackTrace) {
-      throw UploadPhotoException(
-        'Uploading photo $fileName failed. '
-        'Couldn\'t upload data to ${reference.fullPath}.'
-        'Error: $error. StackTrace: $stackTrace',
-      );
+      print('before upload');
+      await reference.putData(data);
+    } catch (e) {
+      throw UploadPhotoException('lol');
     }
 
     return ShareUrls(
@@ -141,15 +127,6 @@ class PhotosRepository {
         'compositing photo failed. '
         'Error: $error. StackTrace: $stackTrace',
       );
-    }
-  }
-
-  Future<bool> _photoExists(Reference reference) async {
-    try {
-      await reference.getDownloadURL();
-      return true;
-    } catch (_) {
-      return false;
     }
   }
 

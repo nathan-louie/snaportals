@@ -10,7 +10,6 @@ import 'package:io_photobooth/gallery/view/gallery_page.dart';
 import 'package:io_photobooth/photobooth/photobooth.dart';
 import 'package:photobooth_ui/photobooth_ui.dart';
 import 'package:photos_repository/photos_repository.dart';
-import 'package:photos_repository/src/photos_repository.dart';
 
 const _videoConstraints = VideoConstraints(
   facingMode: FacingMode(
