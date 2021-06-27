@@ -14,11 +14,9 @@ class PhotoboothPreview extends StatelessWidget {
   const PhotoboothPreview({
     Key? key,
     required this.preview,
-    required this.onSnapPressed,
   }) : super(key: key);
 
   final Widget preview;
-  final VoidCallback onSnapPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +129,6 @@ class PhotoboothPreview extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 30),
             child: ShutterButton(
               key: const Key('photoboothPreview_photo_shutterButton'),
-              onCountdownComplete: onSnapPressed,
             ),
           ),
         ),
