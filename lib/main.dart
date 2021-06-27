@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,6 +39,8 @@ void main() async {
     ),
   );
 
+  await testData();
+
   runZonedGuarded(
     () => runApp(App(
       authenticationRepository: authenticationRepository,
@@ -52,4 +55,14 @@ void main() async {
   SchedulerBinding.instance!.addPostFrameCallback(
     (_) => removeLoadingIndicator(),
   );
+}
+
+Future testData() async {
+  var db = FirebaseFirestore.instance.collection('snaps');
+  var stuff = db.get();
+  stuff.then((QuerySnapshot querySnapshot) {
+    for (var element in querySnapshot.docs) {
+      print(element['snap']);
+    }
+  });
 }
