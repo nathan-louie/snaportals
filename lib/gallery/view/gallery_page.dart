@@ -6,6 +6,10 @@ import 'package:photobooth_ui/photobooth_ui.dart';
 class GalleryPage extends StatelessWidget {
   const GalleryPage({Key? key}) : super(key: key);
 
+  static Route route() {
+    return AppPageRoute(builder: (_) => const GalleryPage());
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
