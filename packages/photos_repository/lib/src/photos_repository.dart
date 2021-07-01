@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -82,17 +81,15 @@ class PhotosRepository {
   }) async {
     Reference reference;
     try {
-      print('before reference make');
       reference = _firebaseStorage.ref('uploads/$fileName');
     } catch (e) {
-      throw UploadPhotoException('no');
+      throw const UploadPhotoException('Could not make reference.');
     }
 
     try {
-      print('before upload');
       await reference.putData(data);
     } catch (e) {
-      throw UploadPhotoException('lol');
+      throw const UploadPhotoException('Could not upload data.');
     }
 
     return ShareUrls(
