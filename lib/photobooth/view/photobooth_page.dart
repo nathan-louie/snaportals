@@ -8,6 +8,7 @@ import 'package:image_compositor/image_compositor.dart';
 import 'package:io_photobooth/gallery/gallery.dart';
 import 'package:io_photobooth/gallery/view/gallery_page.dart';
 import 'package:io_photobooth/photobooth/photobooth.dart';
+import 'package:io_photobooth/users_repository.dart';
 import 'package:photobooth_ui/photobooth_ui.dart';
 import 'package:photos_repository/photos_repository.dart';
 
@@ -123,7 +124,9 @@ class _PhotoboothViewState extends State<PhotoboothView> {
         .then((value) => d = value));
 
     await context.read<PhotosRepository>().sharePhoto(
-        fileName: _getPhotoFileName('dinopee'), data: d, shareText: '');
+        fileName: _getPhotoFileName(UsersRepository.username),
+        data: d,
+        shareText: '');
 
     await Navigator.of(context).pushReplacement(GalleryPage.route());
   }

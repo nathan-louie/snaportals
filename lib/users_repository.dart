@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class UsersRepository {
   static final FirebaseFirestore _fs = FirebaseFirestore.instance;
   static final CollectionReference _cr = _fs.collection('snaps');
+  static final String username = 'userA';
 
   static Future<List> getPhotos() async {
     var a = [];
