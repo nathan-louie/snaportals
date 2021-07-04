@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_compositor/image_compositor.dart';
+import 'package:io_photobooth/users_repository.dart';
 
 /// {@template upload_photo_exception}
 /// Exception thrown when upload photo operation failed.
@@ -91,6 +92,9 @@ class PhotosRepository {
     } catch (e) {
       throw const UploadPhotoException('Could not upload data.');
     }
+
+    var uri = await reference.getDownloadURL();
+    await UsersRepository.updatePhoto(uri);
 
     return ShareUrls(
       explicitShareUrl: _getSharePhotoUrl(fileName),

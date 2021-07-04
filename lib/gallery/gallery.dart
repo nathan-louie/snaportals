@@ -1,2 +1,2 @@
 export 'view/gallery_page.dart';
-export 'widgets/widgets.dart';
+export 'widgets/gallery_display.dart';

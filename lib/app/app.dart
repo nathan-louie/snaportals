@@ -41,7 +41,7 @@ class _App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'snaportals',
+      title: 'I/O Photo Booth',
       theme: theme,
       home: const GalleryPage(),
     );

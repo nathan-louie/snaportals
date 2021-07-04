@@ -39,3 +39,45 @@ class GalleryView extends StatelessWidget {
     );
   }
 }
+
+class GalleryBackground extends StatelessWidget {
+  const GalleryBackground({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      key: const Key('landingPage_background'),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[Color(0xffED8A00), Color(0xffECB900)],
+        ),
+      ),
+    );
+  }
+}
+
+class GalleryBody extends StatelessWidget {
+  const GalleryBody({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        children: [
+          const SizedBox(height: 48),
+          SelectableText(
+            'Gallery View',
+            key: const Key(''),
+            style: theme.textTheme.headline1,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 900, child: GalleryDisplay()),
+        ],
+      ),
+    );
+  }
+}

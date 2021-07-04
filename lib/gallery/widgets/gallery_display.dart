@@ -1,8 +1,6 @@
-import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:io_photobooth/users_repository.dart';
 
 class GalleryDisplay extends StatefulWidget {
   const GalleryDisplay({Key? key}) : super(key: key);
@@ -18,26 +16,19 @@ class _GalleryList extends State<GalleryDisplay> {
 
   @override
   void initState() {
-    getUserFavourites().then((value) {
-      setState(() {
-        a = value;
-      });
-    });
+    UsersRepository.getPhotos().then((foo) => {
+          setState(() {
+            a = foo;
+          })
+        });
     super.initState();
-  }
-
-  static Future<List> getUserFavourites() async {
-    var a = [];
-    var querySnapshot =
-        await FirebaseFirestore.instance.collection('snaps').get();
-    for (var element in querySnapshot.docs) {
-      a.add(element['snap']);
-    }
-    return a;
   }
 
   @override
   Widget build(BuildContext context) {
+    UsersRepository.listenForChanges().then((value) => {
+          if (value) {initState()}
+        });
     return GridView.extent(
         maxCrossAxisExtent: 200,
         padding: const EdgeInsets.all(4),
