@@ -28,7 +28,7 @@ class GalleryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-        const Duration(seconds: 10),
+        const Duration(seconds: 15),
         (Timer t) =>
             Navigator.of(context).pushReplacement(PhotoboothPage.route()));
 

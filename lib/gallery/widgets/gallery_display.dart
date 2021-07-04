@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:io_photobooth/users_repository.dart';
@@ -16,19 +17,23 @@ class _GalleryList extends State<GalleryDisplay> {
 
   @override
   void initState() {
+    UsersRepository.cr.snapshots().listen((event) {
+      getNewPhotos();
+    });
+    getNewPhotos();
+    super.initState();
+  }
+
+  void getNewPhotos() {
     UsersRepository.getPhotos().then((foo) => {
           setState(() {
             a = foo;
           })
         });
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    UsersRepository.listenForChanges().then((value) => {
-          if (value) {initState()}
-        });
     return GridView.extent(
         maxCrossAxisExtent: 200,
         padding: const EdgeInsets.all(4),
