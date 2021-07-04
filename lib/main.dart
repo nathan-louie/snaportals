@@ -38,8 +38,6 @@ void main() async {
     ),
   );
 
-  await testData();
-
   runZonedGuarded(
     () => runApp(App(
       authenticationRepository: authenticationRepository,
@@ -54,14 +52,4 @@ void main() async {
   SchedulerBinding.instance!.addPostFrameCallback(
     (_) => removeLoadingIndicator(),
   );
-}
-
-Future testData() async {
-  var db = FirebaseFirestore.instance.collection('snaps');
-  var stuff = db.get();
-  await stuff.then((QuerySnapshot querySnapshot) {
-    for (var element in querySnapshot.docs) {
-      print(element['snap']);
-    }
-  });
 }
