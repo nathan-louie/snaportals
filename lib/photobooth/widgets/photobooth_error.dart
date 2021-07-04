@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:io_photobooth/l10n/l10n.dart';
 import 'package:photobooth_ui/photobooth_ui.dart';
 
 class PhotoboothError extends StatelessWidget {
@@ -39,13 +38,12 @@ class _PhotoboothCameraAccessDeniedError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     final theme = Theme.of(context);
 
     return _PhotoboothErrorContent(
       children: [
         SelectableText(
-          l10n.photoBoothCameraAccessDeniedHeadline,
+          'l10n.photoBoothCameraAccessDeniedHeadline',
           style: theme.textTheme.headline1?.copyWith(
             color: PhotoboothColors.white,
           ),
@@ -53,7 +51,7 @@ class _PhotoboothCameraAccessDeniedError extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         SelectableText(
-          l10n.photoBoothCameraAccessDeniedSubheadline,
+          'l10n.photoBoothCameraAccessDeniedSubheadline',
           style: theme.textTheme.headline3?.copyWith(
             color: PhotoboothColors.white,
           ),
@@ -69,13 +67,12 @@ class _PhotoboothCameraNotFoundError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     final theme = Theme.of(context);
 
     return _PhotoboothErrorContent(
       children: [
         SelectableText(
-          l10n.photoBoothCameraNotFoundHeadline,
+          'l10n.photoBoothCameraNotFoundHeadline',
           style: theme.textTheme.headline1?.copyWith(
             color: PhotoboothColors.white,
           ),
@@ -83,7 +80,7 @@ class _PhotoboothCameraNotFoundError extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         SelectableText(
-          l10n.photoBoothCameraNotFoundSubheadline1,
+          'l10n.photoBoothCameraNotFoundSubheadline1',
           style: theme.textTheme.headline3?.copyWith(
             color: PhotoboothColors.white,
           ),
@@ -91,7 +88,7 @@ class _PhotoboothCameraNotFoundError extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         SelectableText(
-          l10n.photoBoothCameraNotFoundSubheadline2,
+          'l10n.photoBoothCameraNotFoundSubheadline2',
           style: theme.textTheme.headline3?.copyWith(
             color: PhotoboothColors.white,
           ),
@@ -107,13 +104,12 @@ class _PhotoboothCameraUnknownError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     final theme = Theme.of(context);
 
     return _PhotoboothErrorContent(
       children: [
         SelectableText(
-          l10n.photoBoothCameraErrorHeadline,
+          'l10n.photoBoothCameraErrorHeadline',
           style: theme.textTheme.headline1?.copyWith(
             color: PhotoboothColors.white,
           ),
@@ -121,7 +117,7 @@ class _PhotoboothCameraUnknownError extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         SelectableText(
-          l10n.photoBoothCameraErrorSubheadline1,
+          'l10n.photoBoothCameraErrorSubheadline1',
           style: theme.textTheme.headline3?.copyWith(
             color: PhotoboothColors.white,
           ),
@@ -129,7 +125,7 @@ class _PhotoboothCameraUnknownError extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         SelectableText(
-          l10n.photoBoothCameraErrorSubheadline2,
+          'l10n.photoBoothCameraErrorSubheadline2',
           style: theme.textTheme.headline3?.copyWith(
             color: PhotoboothColors.white,
           ),
@@ -145,13 +141,12 @@ class _PhotoboothCameraNotSupportedError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     final theme = Theme.of(context);
 
     return _PhotoboothErrorContent(
       children: [
         SelectableText(
-          l10n.photoBoothCameraNotSupportedHeadline,
+          'l10n.photoBoothCameraNotSupportedHeadline',
           style: theme.textTheme.headline1?.copyWith(
             color: PhotoboothColors.white,
           ),
@@ -159,7 +154,7 @@ class _PhotoboothCameraNotSupportedError extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         SelectableText(
-          l10n.photoBoothCameraNotSupportedSubheadline,
+          'l10n.photoBoothCameraNotSupportedSubheadline',
           style: theme.textTheme.headline3?.copyWith(
             color: PhotoboothColors.white,
           ),

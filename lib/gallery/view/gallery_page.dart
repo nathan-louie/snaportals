@@ -35,7 +35,7 @@ class GalleryView extends StatelessWidget {
     return const AppPageView(
       background: GalleryBackground(),
       body: GalleryBody(),
-      footer: BlackFooter(),
+      footer: Footer(),
     );
   }
 }
